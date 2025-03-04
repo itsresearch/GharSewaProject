@@ -107,7 +107,7 @@
 <div class="container-fluid p-0 mb-5" id="carousel-container">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="w-100" src="static/img/fixit.png" alt="Image" style="opacity: 1;">
+            <img class="w-100" src="{% static 'img/fixit.png' %}" alt="Image" style="opacity: 1;">
             <div class="carousel-caption" style="background-color: rgba(0, 0, 0, 0);">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -177,10 +177,10 @@
 
     <section id="services" class="services py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-4">Our Services</h2>
+            <h2 class="text-center mb-4">Top Services</h2>
             <div class="row">
                 <div class="col-md-3 mb-4">
-                    <a href="#" class="card-link">
+                    <a href="{% url 'service' %}" class="card-link">
                         <div class="card h-100 text-center p-4 service-card" style="background-image: url('static/img/fact-1.jpg');">
                             <div class="card-overlay"></div>
                             <i class="fas fa-paint-roller fa-3x mb-3 text-white"></i>
@@ -190,7 +190,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <a href="#" class="card-link">
+                    <a href="{% url 'service' %}" class="card-link">
                         <div class="card h-100 text-center p-4 service-card" style="background-image: url('static/img/fact-2.jpg');">
                             <div class="card-overlay"></div>
                             <i class="fas fa-tools fa-3x mb-3 text-white"></i>
@@ -200,7 +200,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <a href="#" class="card-link">
+                    <a href="{% url 'service' %}" class="card-link">
                         <div class="card h-100 text-center p-4 service-card" style="background-image: url('static/img/fact-3.jpg');">
                             <div class="card-overlay"></div>
                             <i class="fas fa-bolt fa-3x mb-3 text-white"></i>
@@ -210,7 +210,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <a href="#" class="card-link">
+                    <a href="{% url 'service' %}" class="card-link">
                         <div class="card h-100 text-center p-4 service-card" style="background-image: url('static/img/fact-4.jpg');">
                             <div class="card-overlay"></div>
                             <i class="fas fa-faucet fa-3x mb-3 text-white"></i>
@@ -220,8 +220,14 @@
                     </a>
                 </div>
             </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-3 text-center">
+                    <a href="{% url 'service' %}" class="btn btn-primary btn-lg">More Services</a>
+                </div>
+            </div>
         </div>
     </section>
+    
 
 
     <!-- Facts Start -->
