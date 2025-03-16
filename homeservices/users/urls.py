@@ -15,4 +15,13 @@ urlpatterns = [
     path('service/', views.service, name='service'),
     path('team/', views.team, name='team'),
     path('testimonial/', views.testimonial, name='testimonial'),
+    path('painting/', views.painting, name='painting'),
+    path('plastering/', views.plastering, name='plastering'),
+    path('electrical/', views.electrical, name='electrical'),
+    path('plumbing/', views.plumbing, name='plumbing'),
+    path('carpentry/', views.carpentry, name='carpentry'),
+    path('flooring/', views.flooring, name='flooring'),
+    path('roofing/', views.roofing, name='roofing'),
+    path('cleaning/', views.cleaning, name='cleaning'),
+    path('appliance/', views.appliance, name='appliance'),
 ]

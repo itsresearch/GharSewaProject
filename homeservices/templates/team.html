@@ -39,9 +39,9 @@
     </div>
     <!-- Spinner End -->
      
-   <!-- Navbar Start -->
+<!-- Navbar Start -->
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-lg-0 fixed-top">
-    <a href="{% static 'index.html' %}" class="navbar-brand d-flex align-items-center">
+    <a href="#" class="navbar-brand d-flex align-items-center">
         <img src="{% static 'img/logo.png' %}" alt="GharSewa Logo" class="me-3" style="height: 90px; width: auto;">
     </a>
 
@@ -57,8 +57,6 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu bg-light m-0">
-                    <a href="{% url 'feature' %}" class="dropdown-item">Features</a>
-                    <a href="{% url 'service' %}" class="dropdown-item">Book Service</a>
                     <a href="{% url 'team' %}" class="dropdown-item">Our Team</a>
                     <a href="{% url 'testimonial' %}" class="dropdown-item">Testimonials</a>
                 </div>
@@ -217,8 +215,9 @@
 
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top" style="background-color: #F47B44; border-color: #F47B44; border-radius: 100px;">
+    <i class="bi bi-arrow-up"></i>
+</a>
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
