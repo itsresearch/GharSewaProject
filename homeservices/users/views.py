@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
@@ -21,6 +22,17 @@ def signup_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        # User confirmed logout, perform logout and redirect
+        logout(request)
+        return redirect('index')  # Redirect to the index page after logging out
+    
+    # If GET request, show the confirmation page
+    return render(request, 'registration/logout.html')
+
 
 def about(request):
     return render(request, 'about.html')

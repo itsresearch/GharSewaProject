@@ -63,9 +63,14 @@
             <a href="{% url 'contact' %}" class="nav-item nav-link">Contact Us</a>
         </div>
         <div class="d-flex ms-3">
-            <a href="{% url 'login' %}" class="btn me-2 px-3 text-white" style="background-color: #F47B44; border-radius: 100px;">Sign In</a>
-            <a href="{% url 'signup' %}" class="btn text-white px-3" style="background-color: #F47B44; border-radius: 100px;">Sign Up</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="btn text-white px-3" style="background-color: #dc3545; border-radius: 100px;">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn me-2 px-3 text-white" style="background-color: #F47B44; border-radius: 100px;">Sign In</a>
+                <a href="{% url 'signup' %}" class="btn text-white px-3" style="background-color: #F47B44; border-radius: 100px;">Sign Up</a>
+            {% endif %}
         </div>
+        
     </div>
 </nav>
 <!-- Navbar End -->
@@ -344,8 +349,6 @@
                     <a class="btn btn-link" href="{% url 'about' %}">About Us</a>
                     <a class="btn btn-link" href="{% url 'contact' %}">Contact Us</a>
                     <a class="btn btn-link" href="{% url 'service' %}">Our Services</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">Support</a>
                 </div>
             </div>
         </div>
