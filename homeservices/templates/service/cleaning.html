@@ -127,45 +127,40 @@
             </p>
         </div>
 
-        <!-- Booking Form -->
-        <div class="booking-form">
-            <h2>Book a Cleaning Service</h2>
-            <form action="#" method="post">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-                </div>
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <textarea id="address" name="address" placeholder="Enter your address" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="service">Service Type</label>
-                    <select id="service" name="service" required>
-                        <option value="">Select a service</option>
-                        <option value="deep-cleaning">Deep Cleaning</option>
-                        <option value="regular-cleaning">Regular Cleaning</option>
-                        <option value="carpet-cleaning">Carpet Cleaning</option>
-                        <option value="window-cleaning">Window Cleaning</option>
-                        <option value="office-cleaning">Office Cleaning</option>
-                        <option value="move-in-move-out-cleaning">Move-In/Move-Out Cleaning</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Preferred Date</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <button type="submit" class="submit-btn">Book Now</button>
-            </form>
-        </div>
-    </div>
-</body>
-</html>
+        <form action="{% url 'book_service' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" placeholder="Enter your address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="service">Service Type</label>
+                <select id="service" name="service" required>
+                    <option value="">Select a service</option>
+                    <option value="deep-cleaning">Deep Cleaning</option>
+                    <option value="regular-cleaning">Regular Cleaning</option>
+                    <option value="carpet-cleaning">Carpet Cleaning</option>
+                    <option value="window-cleaning">Window Cleaning</option>
+                    <option value="office-cleaning">Office Cleaning</option>
+                    <option value="move-in-move-out-cleaning">Move-In/Move-Out Cleaning</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Preferred Date</label>
+                <input type="date" id="date" name="preferred_date" required>
+            </div>
+            <button type="submit" class="submit-btn">Book Now</button>
+        </form>
+        

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path,include
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
 
@@ -24,4 +24,5 @@ urlpatterns = [
     path('roofing/', views.roofing, name='roofing'),
     path('cleaning/', views.cleaning, name='cleaning'),
     path('appliance/', views.appliance, name='appliance'),
+    path('services/', include('allservices.urls')),
 ]
