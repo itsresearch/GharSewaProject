@@ -3,12 +3,29 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
+from .forms import LoginForm 
 
 def index(request):
     return render(request, 'index.html')
 
 def home(request):
     return render(request, 'users/home.html')
+
+def user_login(request):
+    if request.method == 'POST':
+        email = request.POST.get('login')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')  # Redirect to home or dashboard page
+        else:
+            messages.error(request, 'Invalid email or password')
+            return redirect('login')  # Redirect back to login page
+
+    return render(request, 'login.html')
 
 def signup_view(request):
     if request.method == 'POST':

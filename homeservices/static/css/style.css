@@ -6,6 +6,11 @@
     --dark: #182333;
 }
 
+body {
+    background-color: #FFFDD0;
+}
+
+
 .back-to-top {
     position: fixed;
     display: none;
@@ -129,25 +134,21 @@
     }
 }
 
-    /* Initial Transparent Navbar */
-    #navbar {
-        background: transparent;
-        transition: background 0.3s, padding 0.3s;
-        -webkit-transition: background 0.3s, padding 0.3s;
-        -moz-transition: background 0.3s, padding 0.3s;
-        -ms-transition: background 0.3s, padding 0.3s;
-        -o-transition: background 0.3s, padding 0.3s;
+/* Always Creamy White Navbar */
+#navbar {
+    background: #FFFDD0; /* Creamy white */
+    transition: background 0.3s, padding 0.3s;
 }
 
-    /* Sticky Navbar Style */
-    .sticky-navbar {
-        background:rgb(255, 253, 208, 0.5) !important; /* Dark background after scroll */
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1050;
-        padding: 10px 20px;
-    }
+/* Navbar links color */
+.navbar-nav .nav-link {
+    color: black !important;
+}
+
+/* Navbar links hover */
+.navbar-nav .nav-link:hover {
+    color: #F47B44 !important;
+}
 
     /* Navbar Items Color */
     .navbar-nav .nav-link {
@@ -503,4 +504,9 @@ h2::after {
 
 .footer .copyright a:hover {
     color: var(--primary);
+}
+
+.custom-caption-pos {
+    margin-top: 200px;   /* Move down */
+    margin-left: -300px; /* Move left */
 }

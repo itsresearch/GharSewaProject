@@ -127,7 +127,7 @@
             </p>
         </div>
 
-        <form action="{% url 'book_service' %}" method="post">
+        <form action="{% url 'book_cleaning' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
                 <label for="name">Your Name</label>
@@ -143,7 +143,7 @@
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <textarea id="address" name="address" placeholder="Enter your address" required></textarea>
+                <input type="text" id="address" name="address" placeholder="Enter your address" required>
             </div>
             <div class="form-group">
                 <label for="service">Service Type</label>
@@ -163,4 +163,12 @@
             </div>
             <button type="submit" class="submit-btn">Book Now</button>
         </form>
+    </div>
+    <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById("preferred_date").setAttribute('min', today);
+    </script>
+    
+</body>
+</html>
         

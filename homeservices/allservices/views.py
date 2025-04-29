@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from .models import ServiceBooking
 
+
 def book_service(request):
     if request.method == 'POST':
         # Create a ServiceBooking object and save the data
@@ -26,7 +27,8 @@ def book_service(request):
         # Redirect after saving the form data
         return redirect('booking_success')  # Redirect to a thank you page or another page after form submission
 
-    return render(request, 'service/cleaning.html')  # Render the form template
+    # return render(request, 'service/cleaning.html')
+
 
 def booking_success(request):
-    return render(request, 'service/booking_success.html') 
+    return render(request, 'service/booking_success.html')

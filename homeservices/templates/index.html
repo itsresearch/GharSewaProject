@@ -20,6 +20,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="static/lib/animate/animate.min.css" rel="stylesheet">
@@ -64,9 +65,9 @@
         </div>
         <div class="d-flex ms-3">
             {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="btn text-white px-3" style="background-color: #dc3545; border-radius: 100px;">Logout</a>
+                <a href="{% url 'logout' %}" class="btn text-white px-3" style="background-color: #F47B44; border-radius: 100px;">Logout</a>
             {% else %}
-                <a href="{% url 'login' %}" class="btn me-2 px-3 text-white" style="background-color: #F47B44; border-radius: 100px;">Sign In</a>
+                <!-- <a href="{% url 'login' %}" class="btn me-2 px-3 text-white" style="background-color: #F47B44; border-radius: 100px;">Sign In</a> -->
                 <a href="{% url 'signup' %}" class="btn text-white px-3" style="background-color: #F47B44; border-radius: 100px;">Sign Up</a>
             {% endif %}
         </div>
@@ -78,12 +79,20 @@
 <div class="container-fluid p-0 mb-5" id="carousel-container">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="w-100" src="{% static 'img/fixit.png' %}" alt="Image" style="opacity: 1;">
+            <img class="w-100" src="{% static 'img/lastfix.png' %}" alt="Image" style="opacity: 1;">
             <div class="carousel-caption" style="background-color: rgba(0, 0, 0, 0);">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-12 col-lg-10">
-                            <h5 class="text-uppercase mb-3 animated slideInDown" style="font-size: 1.5rem; color: #F1D11E;">Professional Home Services</h5>
+                        <div class="col-12 col-lg-10 custom-caption-pos">
+                            {% if user.is_authenticated %}
+                            <div id="welcome-message" class="animate__animated animate__fadeInLeft" style="margin-bottom: 50px;">
+                                <h2 style="color: #F47B44; font-weight: 900; font-family: 'Poppins', sans-serif; text-decoration: none;">
+                                    Welcome, {{ user.first_name|default:user.username }}!
+                                </h2>
+                            </div>
+                            {% endif %}
+                            
+                            <h5 class="text-uppercase mb-3 animated slideInDown" style="font-size: 1.5rem; color: #1f4863;">Professional Home Services</h5>
                             <h1 class="display-2 mb-3 animated slideInDown" style="font-size: 3rem; color: black;">
                                 Painting, Plumbing <br> & Solutions
                             </h1>
@@ -195,7 +204,7 @@
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="position-relative overflow-hidden ps-5 pt-5 h-100" style="min-height: 400px;">
-                        <img class="position-absolute w-100 h-100" src="{% static 'img/handyman.jpeg' %}" alt="Our Team" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="{% static 'img/pik1.jpg' %}" alt="Our Team" style="object-fit: cover;">
                         <div class="position-absolute top-0 start-0 bg-white pe-3 pb-3" style="width: 200px; height: 200px;">
                             <div class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
                                 <h1 class="text-white">10+</h1>
@@ -226,28 +235,28 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item position-relative">
-                        <img class="img-fluid" src="static/img/team-1.jpg" alt="">
-                        <div class="team-text bg-white p-4">
-                            <h5>Santosh Maharjan</h5>
-                            <span>Plumber</span>
+                        <img class="img-fluid" src="static/img/pik6.webp" alt="">
+                        <div class="team-text p-4">
+                            <h5 style="color: white;">Santosh Maharjan</h5>
+                            <span style="color: white;">Plumber</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item position-relative">
-                        <img class="img-fluid" src="static/img/team-2.jpg" alt="">
-                        <div class="team-text bg-white p-4">
-                            <h5>Bikash Gurung</h5>
-                            <span>Painter</span>
+                        <img class="img-fluid" src="static/img/pik8.jpg" alt="">
+                        <div class="team-text p-4">
+                            <h5 style="color: white;">Bikash Gurung</h5>
+                            <span style="color: white;">Painter</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item position-relative">
-                        <img class="img-fluid" src="static/img/team-3.jpg" alt="">
-                        <div class="team-text bg-white p-4">
-                            <h5>Deepak Bhandari</h5>
-                            <span>Electrician</span>
+                        <img class="img-fluid" src="static/img/pik3.webp" alt="">
+                        <div class="team-text p-4">
+                            <h5 style="color: white;">Deepak Bhandari</h5>
+                            <span style="color: white;">Electrician</span>
                         </div>
                     </div>
                 </div>
@@ -369,6 +378,7 @@
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top" style="background-color: #F47B44; border-color: #F47B44; border-radius: 100px;">
         <i class="bi bi-arrow-up"></i>
     </a>
+    
     
 
 
