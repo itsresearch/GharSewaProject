@@ -19,3 +19,12 @@ class CustomUserCreationForm(UserCreationForm):
 class LoginForm(forms.Form):
     login = forms.EmailField(label="Email", max_length=255)
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
+
+
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    subject = forms.CharField(max_length=200)
+    message = forms.CharField(widget=forms.Textarea)

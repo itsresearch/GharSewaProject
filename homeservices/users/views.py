@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from .forms import LoginForm 
+from django.core.mail import send_mail
+from .forms import ContactForm
 
 def index(request):
     return render(request, 'index.html')
@@ -20,7 +22,8 @@ def user_login(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')  # Redirect to home or dashboard page
+            next_url = request.GET.get('next')
+            return redirect(next_url if next_url else 'home')  # Redirect to original or home
         else:
             messages.error(request, 'Invalid email or password')
             return redirect('login')  # Redirect back to login page
@@ -49,6 +52,31 @@ def logout_view(request):
     
     # If GET request, show the confirmation page
     return render(request, 'registration/logout.html')
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            full_message = f"Message from {name} <{email}>:\n\n{message}"
+
+            send_mail(
+                subject,
+                full_message,
+                email,
+                ['researchofficial55@gmail.com'],  # receiver
+                fail_silently=False,
+            )
+            messages.success(request, 'Your message has been sent successfully!')
+            return redirect('contact')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'contact.html', {'form': form})
 
 
 def about(request):

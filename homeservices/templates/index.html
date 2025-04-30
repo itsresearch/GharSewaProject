@@ -110,7 +110,7 @@
             <h2 class="text-center mb-4">Top Services</h2>
             <div class="row">
                 <div class="col-md-3 mb-4">
-                    <a href="{% url 'painting' %}" class="card-link">
+                    <a href="{% if user.is_authenticated %}{% url 'painting' %}{% else %}{% url 'signup' %}?next={% url 'painting' %}{% endif %}" class="card-link">
                         <div class="card h-100 text-center p-4 service-card" style="background-image: url('{% static 'img/painter.jpeg' %}');">
                             <div class="card-overlay"></div>
                             <i class="fas fa-paint-roller fa-3x mb-3 text-white"></i>
@@ -120,7 +120,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <a href="{% url 'plastering' %}" class="card-link">
+                    <a href="{% if user.is_authenticated %}{% url 'plastering' %}{% else %}{% url 'signup' %}?next={% url 'plastering' %}{% endif %}" class="card-link">
                         <div class="card h-100 text-center p-4 service-card" style="background-image: url('{% static 'img/plaster.jpg' %}');">
                             <div class="card-overlay"></div>
                             <i class="fas fa-tools fa-3x mb-3 text-white"></i>
@@ -130,7 +130,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <a href="{% url 'electrical' %}" class="card-link">
+                    <a href="{% if user.is_authenticated %}{% url 'electrical' %}{% else %}{% url 'signup' %}?next={% url 'electrical' %}{% endif %}" class="card-link">
                         <div class="card h-100 text-center p-4 service-card" style="background-image: url('{% static 'img/electrician.jpg' %}');">
                             <div class="card-overlay"></div>
                             <i class="fas fa-bolt fa-3x mb-3 text-white"></i>
@@ -140,7 +140,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 mb-4">
-                    <a href="{% url 'plumbing' %}" class="card-link">
+                    <a href="{% if user.is_authenticated %}{% url 'plumbing' %}{% else %}{% url 'signup' %}?next={% url 'plumbing' %}{% endif %}" class="card-link">
                         <div class="card h-100 text-center p-4 service-card" style="background-image: url('{% static 'img/plumber.png' %}');">
                         ">
                             <div class="card-overlay"></div>
@@ -204,7 +204,7 @@
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="position-relative overflow-hidden ps-5 pt-5 h-100" style="min-height: 400px;">
-                        <img class="position-absolute w-100 h-100" src="{% static 'img/pik1.jpg' %}" alt="Our Team" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="{% static 'img/exterior.png' %}" alt="Our Team" style="object-fit: cover;">
                         <div class="position-absolute top-0 start-0 bg-white pe-3 pb-3" style="width: 200px; height: 200px;">
                             <div class="d-flex flex-column justify-content-center text-center bg-primary h-100 p-3">
                                 <h1 class="text-white">10+</h1>
@@ -246,7 +246,7 @@
                     <div class="team-item position-relative">
                         <img class="img-fluid" src="static/img/pik8.jpg" alt="">
                         <div class="team-text p-4">
-                            <h5 style="color: white;">Bikash Gurung</h5>
+                            <h5 style="color: white;">Bikash Sharma</h5>
                             <span style="color: white;">Painter</span>
                         </div>
                     </div>

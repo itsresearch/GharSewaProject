@@ -1,8 +1,9 @@
 # allservices/views.py
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import ServiceBooking
 
-
+@login_required(login_url='/login/')  # Redirect to 'login' if not authenticated
 def book_service(request):
     if request.method == 'POST':
         # Create a ServiceBooking object and save the data
@@ -27,7 +28,6 @@ def book_service(request):
         # Redirect after saving the form data
         return redirect('booking_success')  # Redirect to a thank you page or another page after form submission
 
-    # return render(request, 'service/cleaning.html')
 
 
 def booking_success(request):
