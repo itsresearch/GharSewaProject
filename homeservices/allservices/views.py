@@ -13,6 +13,7 @@ def book_service(request):
         address = request.POST.get('address')
         service = request.POST.get('service')
         preferred_date = request.POST.get('preferred_date')
+        note = request.POST.get('note')
 
         # Create a new ServiceBooking object and save it to the database
         booking = ServiceBooking(
@@ -21,7 +22,8 @@ def book_service(request):
             phone=phone,
             address=address,
             service=service,
-            preferred_date=preferred_date
+            preferred_date=preferred_date,
+            note=note
         )
         booking.save()
 

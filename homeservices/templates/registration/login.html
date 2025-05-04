@@ -1,4 +1,5 @@
 {% load static socialaccount %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -153,6 +154,16 @@
             width: 20px;
         }
 
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
         @keyframes pulse {
             from {
                 transform: scale(0.9);
@@ -166,12 +177,19 @@
     </style>
 </head>
 <body>
-    <form method="post" class="form">
+    <form method="post" class="form" action="{% url 'login' %}">
         {% csrf_token %}
         <p class="title">Login</p>
         <p class="message">Welcome back! Please login to your account.</p>
 
-        <!-- {% if messages %}
+        <!-- Error messages -->
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                Invalid email or password
+            </div>
+        {% endif %}
+        
+        {% if messages %}
             <div class="alert alert-danger">
                 {% for message in messages %}
                     <p>{{ message }}</p>
@@ -180,16 +198,16 @@
         {% endif %}
 
         <label>
-            <input type="text" name="login" class="input" required placeholder="">
+            <input type="email" name="login" class="input" id="id_email" required>
             <span>Email</span>
         </label>
 
         <label>
-            <input type="password" name="password" class="input" required placeholder="">
+            <input type="password" name="password" class="input" id="id_password" required>
             <span>Password</span>
         </label>
 
-        <button type="submit" class="submit">Login</button> -->
+        <button type="submit" class="submit">Login</button>
 
         <p class="message text-center">Sign in with:</p>
         <a href="{% provider_login_url 'google' process='login' %}?prompt=select_account" class="btn-google">

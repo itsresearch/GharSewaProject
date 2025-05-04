@@ -41,7 +41,7 @@
      
  <!-- Navbar Start -->
 <nav id="navbar" class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-lg-0 fixed-top">
-    <a href="#" class="navbar-brand d-flex align-items-center">
+    <a href="{% url 'index' %}" class="navbar-brand d-flex align-items-center">
         <img src="{% static 'img/logo.png' %}" alt="GharSewa Logo" class="me-3" style="height: 90px; width: auto;">
     </a>
 
@@ -124,6 +124,30 @@
         </div>
     </div>
     <!-- About End -->
+
+      </div>
+      
+     <!-- On-Site Payment Note Start -->
+<div class="container-xxl py-4">
+    <div class="container">
+        <div class="rounded-4 shadow p-4 d-flex align-items-start wow fadeInUp" data-wow-delay="0.1s"
+             style="background-color: #F47B44; border-left: 8px solid #fff;">
+            <div class="me-3 fs-3 text-white">
+                ⚠️
+            </div>
+            <div>
+                <h5 class="text-white fw-bold mb-2">
+                    On-site Payment Only
+                </h5>
+                <p class="mb-0 text-white">
+                    💰 Please note that <strong>GharSewa</strong> currently supports <u>on-site payments</u> only.<br>
+                    🔧 Make the payment directly to the service provider <strong>after the service is completed</strong> at your location.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- On-Site Payment Note End -->
 
 
     <!-- Video Section Start -->

@@ -27,11 +27,19 @@ class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     profile_photo = models.URLField(blank=True, null=True)
     name = models.CharField(_('full name'), max_length=255, blank=True)
-    
+    first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    last_name = models.CharField(_('last name'), max_length=150, blank=True)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    
+
     objects = CustomUserManager()
 
     def __str__(self):
         return self.email
+
+    def save(self, *args, **kwargs):
+        # Ensure name is populated from first_name and last_name if not set
+        if not self.name and (self.first_name or self.last_name):
+            self.name = f"{self.first_name} {self.last_name}".strip()
+        super().save(*args, **kwargs)

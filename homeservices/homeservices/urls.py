@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('', views.index, name='index'), 
     path('', include('users.urls')),
+    path('dashboard/', include('dashboard.urls')), 
 ]

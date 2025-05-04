@@ -1,13 +1,15 @@
 from django.urls import path, include
 from django.contrib.auth.views import LoginView, LogoutView
 from . import views
+from django.contrib import admin
+
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),
-    path('login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('signup/', views.signup_view, name='signup'),  
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('signup/', views.signup_view, name='signup'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.logout_view, name='logout'),
     path('about/', views.about, name='about'),
     path('appointment/', views.appointment, name='appointment'),
     path('contact/', views.contact_view, name='contact'),
@@ -25,4 +27,5 @@ urlpatterns = [
     path('cleaning/', views.cleaning, name='cleaning'),
     path('appliance/', views.appliance, name='appliance'),
     path('services/', include('allservices.urls')),
+
 ]

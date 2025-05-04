@@ -2,11 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from .forms import CustomUserCreationForm
+from django.views.decorators.csrf import csrf_protect
+
 from django.contrib.auth import authenticate
 from .forms import LoginForm 
 from django.core.mail import send_mail
 from .forms import ContactForm
+from django.contrib.auth.backends import ModelBackend
+
 
 def index(request):
     return render(request, 'index.html')
@@ -14,33 +18,33 @@ def index(request):
 def home(request):
     return render(request, 'users/home.html')
 
+@csrf_protect
 def user_login(request):
     if request.method == 'POST':
         email = request.POST.get('login')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
-
+        
         if user is not None:
             login(request, user)
-            next_url = request.GET.get('next')
-            return redirect(next_url if next_url else 'home')  # Redirect to original or home
+            return redirect('index')  # Make sure 'home' is the correct URL name
         else:
             messages.error(request, 'Invalid email or password')
-            return redirect('login')  # Redirect back to login page
-
-    return render(request, 'login.html')
+    
+    return render(request, 'registration/login.html')
 
 def signup_view(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            # Explicitly specify the backend when logging in
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('index')
         else:
             messages.error(request, 'Error in signup process')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
 
@@ -126,6 +130,7 @@ def cleaning(request):
 
 def appliance(request):
     return render(request, 'service/appliance.html')
+
 
 
 

@@ -8,6 +8,7 @@ class ServiceBooking(models.Model):
     address = models.CharField(max_length=255)
     service = models.CharField(max_length=100)
     preferred_date = models.DateField()
+    note = models.TextField(blank=True, null=True)  
     
 
     def __str__(self):

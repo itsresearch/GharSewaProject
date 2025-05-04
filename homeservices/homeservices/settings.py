@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'users.apps.UsersConfig',  # Replace 'users' with this
     'allservices',
+    'dashboard',
+
 ]
 
 MIDDLEWARE = [

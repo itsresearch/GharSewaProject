@@ -137,6 +137,8 @@ body {
 #navbar {
     background: rgba(255, 253, 192, 0.5); /* Creamy white with 80% opacity */
     transition: background 0.3s, padding 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 /* Navbar links color */
@@ -210,7 +212,6 @@ body {
 
 .carousel-caption .breadcrumb-item+.breadcrumb-item::before {
     content: "\f111";
-    font-family: "Font Awesome 5 Free";
     font-weight: 900;
     color: var(--primary);
 }
@@ -317,6 +318,12 @@ body {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 
 .card-overlay {
     position: absolute;
@@ -464,6 +471,7 @@ h2::after {
 /*** Footer ***/
 .footer {
     color: #999999;
+    
 }
 
 .footer .btn.btn-link {
