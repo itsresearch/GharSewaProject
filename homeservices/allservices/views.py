@@ -1,36 +1,52 @@
-# allservices/views.py
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import ServiceBooking
+from .forms import ServiceBookingForm
 
-@login_required(login_url='/login/')  # Redirect to 'login' if not authenticated
-def book_service(request):
+# Define service types and their corresponding templates
+template_map = {
+    'appliance': 'service/appliance.html',
+    'cleaning': 'service/cleaning.html',
+    'electrical': 'service/electrical.html',
+    'flooring': 'service/flooring.html',
+    'painting': 'service/painting.html',
+    'plastering': 'service/plastering.html',
+    'plumbing': 'service/plumbing.html',
+    'roofing': 'service/roofing.html',
+}
+
+@login_required(login_url='/login/')
+def service_list(request):
+    return render(request, 'service/service.html')
+
+# views.py
+@login_required(login_url='/login/')
+@login_required(login_url='/login/')
+def book_service(request, service_type):
+    if service_type not in template_map:
+        messages.error(request, "Invalid service type.")
+        return redirect('service')
+
     if request.method == 'POST':
-        # Create a ServiceBooking object and save the data
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-        service = request.POST.get('service')
-        preferred_date = request.POST.get('preferred_date')
-        note = request.POST.get('note')
+        form = ServiceBookingForm(request.POST, service_type=service_type)
+        if form.is_valid():
+            booking = form.save(commit=False)
+            booking.user = request.user
+            booking.save()
+            messages.success(request, "Service booked successfully!")
+            return redirect('booking_success')
+        else:
+            print("Form errors:", form.errors)  # Debugging
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ServiceBookingForm(service_type=service_type)
+    
+    return render(request, template_map[service_type], {
+        'form': form,
+        'service_type': service_type
+    })
 
-        # Create a new ServiceBooking object and save it to the database
-        booking = ServiceBooking(
-            name=name,
-            email=email,
-            phone=phone,
-            address=address,
-            service=service,
-            preferred_date=preferred_date,
-            note=note
-        )
-        booking.save()
-
-        # Redirect after saving the form data
-        return redirect('booking_success')  # Redirect to a thank you page or another page after form submission
-
-
-
+@login_required(login_url='/login/')
 def booking_success(request):
     return render(request, 'service/booking_success.html')
