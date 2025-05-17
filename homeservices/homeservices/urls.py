@@ -13,6 +13,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('dashboard/', include('dashboard.urls')), 
 
+
     path('', lambda r: redirect('index'), name='index'),
     path('about/', lambda r: render(r, 'about.html'), name='about'),
     path('services/', lambda r: render(r, 'service.html'), name='service'),

@@ -1,11 +1,15 @@
 from django import forms
-from .models import ServiceBooking
+from django.contrib.auth.forms import UserChangeForm
+from users.models import CustomUser
 
-class ServiceBookingForm(forms.ModelForm):
+class CustomUserChangeForm(UserChangeForm):
     class Meta:
-        model = ServiceBooking
-        fields = ['name', 'email', 'phone', 'address', 'service', 'preferred_date', 'note']
-        widgets = {
-            'preferred_date': forms.DateInput(attrs={'type': 'date'}),
-            'note': forms.Textarea(attrs={'rows': 4}),
-        }
+        model = CustomUser
+        fields = ('email', 'name', 'first_name', 'last_name', 'profile_photo')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if 'username' in self.fields:
+            del self.fields['username']
+        if 'password' in self.fields:
+            del self.fields['password']
