@@ -179,50 +179,49 @@
 </head>
 <body>
   <header id="header" class="header fixed-top d-flex align-items-center">
-  <div class="d-flex align-items-center justify-content-between">
-    <a href="{% url 'user_dashboard' %}" class="logo d-flex align-items-center">
-      <img src="{% static 'assets/img/logo.png' %}" alt="GharSewa Logo">
-      <span class="d-none d-lg-block">GharSewa Admin</span>
-    </a>
-    <i class="bi bi-list toggle-sidebar-btn"></i>
-  </div>
-  <nav class="header-nav ms-auto">
-    <ul class="d-flex align-items-center">
-      <li class="nav-item dropdown pe-3">
-        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          {% if request.user.profile_photo %}
-            <img src="{{ request.user.profile_photo }}" alt="Profile" class="rounded-circle" style="width: 40px; height: 40px;">
-          {% else %}
-            <img src="{% static 'assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle" style="width: 40px; height: 40px;">
-          {% endif %}
-          <span class="d-none d-md-block dropdown-toggle ps-2">{{ request.user.name|default:request.user.email }}</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-          <li class="dropdown-header">
-            <h6>{{ request.user.name|default:"User" }}</h6>
-            <span>Admin</span>
-          </li>
-          <li><hr class="dropdown-divider"></li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="{% url 'user_profile' %}">
-              <i class="bi bi-person"></i>
-              <span>My Profile</span>
-            </a>
-          </li>
-          <li><hr class="dropdown-divider"></li>
-          <li>
-            <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
-              <i class="bi bi-box-arrow-right"></i>
-              <span>Sign Out</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-</header>
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="{% url 'user_dashboard' %}" class="logo d-flex align-items-center">
+        <img src="{% static 'assets/img/logo.png' %}" alt="GharSewa Logo">
+        <span class="d-none d-lg-block">GharSewa Admin</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            {% if request.user.profile_photo %}
+              <img src="{{ request.user.profile_photo }}" alt="Profile" class="rounded-circle" style="width: 40px; height: 40px;">
+            {% else %}
+              <img src="{% static 'assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle" style="width: 40px; height: 40px;">
+            {% endif %}
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ request.user.name|default:request.user.email }}</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>{{ request.user.name|default:"User" }}</h6>
+              <span>Admin</span>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'user_profile' %}">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
@@ -265,7 +264,6 @@
     </ul>
   </aside>
 
-  <!-- ======= Main Content ======= -->
   <main id="main" class="main">
     <div class="pagetitle">
       <h1>Add Service Provider</h1>
@@ -285,7 +283,7 @@
             <div class="card-body p-4">
               <h5 class="card-title">Add a New Service Provider</h5>
               <p class="text-muted mb-4">Fill in the details below to register a new service provider.</p>
-              <form method="post" enctype="multipart/form-data" novalidate>
+              <form method="post" novalidate id="serviceProviderForm">
                 {% csrf_token %}
                 <div class="row g-3">
                   <div class="col-md-6">
@@ -303,6 +301,7 @@
                     <div class="form-group">
                       <label for="id_email" class="form-label">Email</label>
                       <input type="email" name="email" class="form-control" id="id_email" value="{{ form.email.value|default:'' }}" required>
+                      <div class="invalid-feedback" id="emailError"></div>
                       {% if form.email.errors %}
                         <div class="invalid-feedback d-block">
                           {{ form.email.errors|join:", " }}
@@ -313,7 +312,8 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="id_phone" class="form-label">Phone</label>
-                      <input type="tel" name="phone" class="form-control" id="id_phone" value="{{ form.phone.value|default:'' }}" required>
+                      <input type="tel" name="phone" class="form-control" id="id_phone" value="{{ form.phone.value|default:'' }}" required pattern="^(97|98)\d{8}$">
+                      <div class="invalid-feedback" id="phoneError"></div>
                       {% if form.phone.errors %}
                         <div class="invalid-feedback d-block">
                           {{ form.phone.errors|join:", " }}
@@ -327,7 +327,8 @@
                       <input type="text" name="address" class="form-control" id="id_address" value="{{ form.address.value|default:'' }}" required>
                       {% if form.address.errors %}
                         <div class="invalid-feedback d-block">
-                          {{ form.address.errors|join:", " }}
+                          {{ form.address.errors|join:", "
+
                         </div>
                       {% endif %}
                     </div>
@@ -335,7 +336,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="id_age" class="form-label">Age</label>
-                      <input type="number" name="age" class="form-control" id="id_age" value="{{ form.age.value|default:'' }}" required>
+                      <input type="number" name="age" class="form-control" id="id_age" value="{{ form.age.value|default:'' }}" required min="18" max="100">
                       {% if form.age.errors %}
                         <div class="invalid-feedback d-block">
                           {{ form.age.errors|join:", " }}
@@ -354,17 +355,6 @@
                       {% if form.service_type.errors %}
                         <div class="invalid-feedback d-block">
                           {{ form.service_type.errors|join:", " }}
-                        </div>
-                      {% endif %}
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label for="id_photo" class="form-label">Photo</label>
-                      <input type="file" name="photo" class="form-control" id="id_photo">
-                      {% if form.photo.errors %}
-                        <div class="invalid-feedback d-block">
-                          {{ form.photo.errors|join:", " }}
                         </div>
                       {% endif %}
                     </div>
@@ -393,7 +383,6 @@
     </section>
   </main>
 
-  <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
       © Copyright <strong><span>GharSewa Admin</span></strong>. All Rights Reserved
@@ -405,5 +394,39 @@
   <!-- Vendor JS Files -->
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'assets/js/main.js' %}"></script>
-</body>
-</html>
+
+  <script>
+    document.getElementById('serviceProviderForm').addEventListener('submit', function(event) {
+      let isValid = true;
+      const phoneInput = document.getElementById('id_phone');
+      const emailInput = document.getElementById('id_email');
+      const phoneError = document.getElementById('phoneError');
+      const emailError = document.getElementById('emailError');
+
+      // Phone validation
+      const phonePattern = /^(97|98)\d{8}$/;
+      if (!phonePattern.test(phoneInput.value)) {
+        phoneError.textContent = 'Phone number must start with 97 or 98 and be 10 digits long.';
+        phoneInput.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        phoneError.textContent = '';
+        phoneInput.classList.remove('is-invalid');
+      }
+
+      // Email validation
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailPattern.test(emailInput.value)) {
+        emailError.textContent = 'Please enter a valid email address.';
+        emailInput.classList.add('is-invalid');
+        isValid = false;
+      } else {
+        emailError.textContent = '';
+        emailInput.classList.remove('is-invalid');
+      }
+
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  </script>

@@ -171,6 +171,9 @@
     .back-to-top:hover {
       background-color: #e5632f;
     }
+    #id_revenue {
+      display: none;
+    }
     @media (max-width: 991px) {
       .main {
         padding: 20px;
@@ -293,15 +296,7 @@
     </div>
 
     <section class="section">
-      {% if messages %}
-        {% for message in messages %}
-          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {% endfor %}
-      {% endif %}
-
+     
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="card">
@@ -310,8 +305,11 @@
             </div>
             <div class="card-body p-4">
               <p class="text-muted mb-4">Fill in the details below to schedule a new service booking.</p>
-              <form method="post" novalidate>
+              <form method="post" novalidate id="bookingForm">
                 {% csrf_token %}
+                <!-- Hidden revenue field with default value -->
+                <input type="hidden" name="revenue" id="id_revenue" value="0.00">
+                
                 <!-- Display non-field errors -->
                 {% if form.non_field_errors %}
                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -319,6 +317,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
                 {% endif %}
+                
                 <!-- Display all form errors for debugging -->
                 {% if form.errors %}
                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -331,6 +330,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
                 {% endif %}
+                
                 <div class="row g-3">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -357,7 +357,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="id_phone" class="form-label">Phone</label>
-                      <input type="tel" name="phone" class="form-control" id="id_phone" value="{{ form.phone.value|default:'' }}" required>
+                      <input type="tel" name="phone" class="form-control" id="id_phone" value="{{ form.phone.value|default:'' }}" required pattern="(97|98)\d{8}" maxlength="10">
                       {% if form.phone.errors %}
                         <div class="invalid-feedback d-block">
                           {{ form.phone.errors|join:", " }}
@@ -402,17 +402,6 @@
                       {% endif %}
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="id_revenue" class="form-label">Revenue (USD)</label>
-                      <input type="number" step="0.01" name="revenue" class="form-control" id="id_revenue" value="{{ form.revenue.value|default_if_none:'' }}" required>
-                      {% if form.revenue.errors %}
-                        <div class="invalid-feedback d-block">
-                          {{ form.revenue.errors|join:", " }}
-                        </div>
-                      {% endif %}
-                    </div>
-                  </div>
                   <div class="col-12">
                     <div class="form-group">
                       <label for="id_note" class="form-label">Additional Notes</label>
@@ -449,5 +438,59 @@
   <!-- Vendor JS Files -->
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set today's date as min date for preferred_date
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('id_preferred_date').min = today;
+      
+      // Form validation
+      const form = document.getElementById('bookingForm');
+      
+      form.addEventListener('submit', function(event) {
+        let isValid = true;
+        
+        // Validate phone number
+        const phoneInput = document.getElementById('id_phone');
+        const phonePattern = /^(97|98)\d{8}$/;
+        
+        if (!phonePattern.test(phoneInput.value)) {
+          alert('Phone number must start with 97 or 98 and be 10 digits long.');
+          phoneInput.focus();
+          isValid = false;
+        }
+        
+        // Validate email
+        const emailInput = document.getElementById('id_email');
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!emailPattern.test(emailInput.value)) {
+          alert('Please enter a valid email address.');
+          emailInput.focus();
+          isValid = false;
+        }
+        
+        // Validate date
+        const dateInput = document.getElementById('id_preferred_date');
+        const selectedDate = new Date(dateInput.value);
+        const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+        
+        if (selectedDate < currentDate) {
+          alert('Preferred date cannot be before today.');
+          dateInput.focus();
+          isValid = false;
+        }
+        
+        if (!isValid) {
+          event.preventDefault();
+        }
+      });
+      
+      // Set default revenue value
+      document.getElementById('id_revenue').value = '0.00';
+    });
+  </script>
 </body>
 </html>

@@ -92,10 +92,11 @@
       background: #fff;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       margin-bottom: 30px;
+      min-height: 180px; /* Standardize card height */
     }
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+      transform: translateY(-5px) scale(1.02); /* Enhanced hover effect */
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
     }
     .card-title {
       color: #f47b44;
@@ -105,6 +106,9 @@
     }
     .card-body {
       padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Center content vertically */
     }
     .card-icon {
       background-color: #f47b44;
@@ -204,6 +208,12 @@
     .back-to-top:hover {
       background-color: #e5632f;
     }
+    /* Ensure cards are aligned horizontally */
+    .card-row {
+      display: flex;
+      align-items: stretch; /* Equal height for all cards */
+      gap: 20px; /* Consistent spacing between cards */
+    }
     @media (max-width: 991px) {
       .main {
         padding: 20px;
@@ -211,7 +221,11 @@
       .card {
         margin-bottom: 20px;
       }
-      .col-md-6, .col-xxl-4 {
+      .card-row {
+        flex-direction: column; /* Stack cards vertically on mobile */
+        gap: 15px;
+      }
+      .col-lg-4, .col-md-4 {
         flex: 0 0 100%;
         max-width: 100%;
       }
@@ -221,7 +235,7 @@
 <body>
  <header id="header" class="header fixed-top d-flex align-items-center">
   <div class="d-flex align-items-center justify-content-between">
-    <a href="{% url 'user_dashboard' %}" class="logo d-flex align-items-center">
+    <a href="/" class="logo d-flex align-items-center">
       <img src="{% static 'assets/img/logo.png' %}" alt="GharSewa Logo">
       <span class="d-none d-lg-block">GharSewa Admin</span>
     </a>
@@ -328,14 +342,14 @@
     <section class="section dashboard">
       <div class="row">
         <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row">
+        <div class="col-lg-12">
+          <div class="row card-row g-4">
             <!-- Total Bookings Card -->
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-4 col-12">
               <a href="{% url 'service_bookings' %}" class="text-decoration-none">
                 <div class="card info-card bookings-card">
                   <div class="card-body">
-                    <h5 class="card-title">Total <br> Bookings</h5>
+                    <h5 class="card-title">Total Bookings</h5>
                     <div class="d-flex align-items-center">
                       <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-list-task"></i>
@@ -351,31 +365,8 @@
               </a>
             </div>
 
-            
-
-            <!-- Active Customers Card -->
-            <div class="col-lg-4 col-md-6">
-              <a href="{% url 'user_profile' %}" class="text-decoration-none">
-                <div class="card info-card customers-card">
-                  <div class="card-body">
-                    <h5 class="card-title">Active Customers</h5>
-                    <div class="d-flex align-items-center">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-people"></i>
-                      </div>
-                      <div class="ps-3">
-                        <h6 class="card-metric">{{ customers_count }}</h6>
-                        <span class="text-danger small pt-1 fw-bold">12%</span>
-                        <span class="card-subtext pt-2 ps-1">decrease from last year</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-
             <!-- Completed Services Card -->
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-4 col-12">
               <a href="{% url 'service_bookings' %}" class="text-decoration-none">
                 <div class="card info-card completed-card">
                   <div class="card-body">
@@ -396,7 +387,7 @@
             </div>
 
             <!-- Service Providers Card -->
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-4 col-12">
               <a href="{% url 'service_providers' %}" class="text-decoration-none">
                 <div class="card info-card providers-card">
                   <div class="card-body">
@@ -588,7 +579,7 @@
         const row = document.getElementById(`booking-row-${bookingId}`);
         const statusBadge = document.getElementById(`status-badge-${bookingId}`);
 
-        fetch('{% url 'update_booking_status' %}', {
+        fetch("{% url 'update_booking_status' %}", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

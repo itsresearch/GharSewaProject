@@ -364,7 +364,7 @@
         const row = document.getElementById(`booking-row-${bookingId}`);
         const statusBadge = document.getElementById(`status-badge-${bookingId}`);
 
-        fetch('{% url 'update_booking_status' %}', {
+        fetch("{% url 'update_booking_status' %}", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -75,18 +75,7 @@
     <!-- Page Header End -->
     <div class="container mb-5">
         {% if user.is_authenticated %}
-            {% if user.socialaccount_set.all %}
-                {% with user.socialaccount_set.first as account %}
-                    <div class="alert alert-success d-flex align-items-center gap-3" role="alert">
-                        <img src="{{ account.get_avatar_url }}" alt="Profile Photo" class="rounded-circle" width="50" height="50">
-                        <div>
-                            <strong>Hello, {{ account.extra_data.name }}!</strong><br>
-                            Email: {{ account.extra_data.email }}
-                        </div>
-                    </div>
-                {% endwith %}
-            {% else %}
-            {% endif %}
+            
         {% else %}
             <div class="alert alert-warning" role="alert">
                 You are not logged in.
