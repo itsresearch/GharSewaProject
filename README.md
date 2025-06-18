@@ -124,5 +124,5 @@ Thanks to:
 ## 📬 Contact
 
 **Developer:** Research Devkota  
-📧 Email: [your email here]  
+📧 Email: researchofficial55@gmail.com  
 📍 Location: Kathmandu, Nepal
