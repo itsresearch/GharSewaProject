@@ -1,128 +1,109 @@
+# GharSewaProject
 
-# 🏠 GharSewa - Home Service Booking System
+GharSewaProject is a Django-based web platform for booking and managing home services such as painting, plumbing, electrical work, cleaning, appliance repair, and more. It connects users with verified service providers, streamlining the process of finding, booking, and reviewing home services.
 
-**GharSewa** is an online home service booking platform built using **Python Django**. It connects users with verified service providers (e.g., plumbers, electricians, painters, etc.) through a clean, user-friendly interface. The platform supports user and employee registration, Google Sign-In, real-time booking, and an admin dashboard.
 
----
+NOTE: This is a partial version of the GharSewa project. The complete and fully functional project is hosted in a separate private repository. For access or collaboration inquiries, please contact me directly. Unauthorized copying, reproduction, or distribution of this project is strictly prohibited and may lead to legal consequences.
 
-## 🚀 Features
+The screenshots of the system is as below:
 
-- 🔐 User Authentication (Email/Password & Google Login)
-- 🧑‍💼 Service Provider Registration
-- 🛠️ Browse & Book Home Services
-- 📅 Schedule Appointments
-- ⭐ User Feedback/Review System
-- 📊 Custom Admin Dashboard
-- 📁 All user & service data stored in a secure database
+## Features
 
----
+- **User Registration & Authentication**: Secure sign-up and login with email (custom user model), profile management, and password reset.
+- **Service Provider Management**: Providers can register, manage their profiles, and specify their service types and availability. Admins can verify providers.
+- **Service Booking & Requests**: Users can browse services, book appointments, and track the status of their requests. Providers receive notifications for new requests and status updates.
+- **Dashboard**: Separate dashboards for users, providers, and admins to manage bookings, services, and profiles.
+- **Notifications**: Real-time notifications for service requests and status changes.
+- **Testimonials & Ratings**: Users can leave testimonials and rate service providers.
+- **Responsive Frontend**: Modern, mobile-friendly UI using Bootstrap and custom templates.
+- **Admin Panel**: Full-featured Django admin for managing users, providers, services, and bookings.
 
-## 🛠️ Tech Stack
+## Technology Stack
 
-| Technology     | Use Case                       |
-|----------------|--------------------------------|
-| Django         | Backend Framework              |
-| SQLite         | Default Database               |
-| HTML/CSS       | Frontend Layout                |
-| JavaScript     | Interactions & Form Handling   |
-| Bootstrap      | Responsive Design              |
-| Google OAuth   | Social Authentication          |
+- **Backend**: Python, Django, Django REST Framework, Channels (for real-time features)
+- **Frontend**: HTML, CSS (Bootstrap), JavaScript, Django Templates
+- **Database**: SQLite (default, can be switched to PostgreSQL/MySQL)
+- **Other Libraries**: django-allauth, django-crispy-forms, channels-redis, Pillow, etc.
 
----
-
-## 🔧 Installation
-
-1. **Clone the Repository**
-
-```bash
-git clone https://github.com/yourusername/gharsewa.git
-cd gharsewa
-```
-
-2. **Create & Activate Virtual Environment**
-
-```bash
-python -m venv env
-source env/bin/activate      # On Windows: env\Scripts\activate
-```
-
-3. **Install Dependencies**
-
-```bash
-pip install -r requirements.txt
-```
-
-4. **Configure Google Login (Optional)**  
-   - Add your credentials in `settings.py` under `SOCIAL_AUTH_GOOGLE_*`
-   - Create OAuth credentials at: https://console.developers.google.com
-
-5. **Apply Migrations**
-
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-6. **Create Superuser**
-
-```bash
-python manage.py createsuperuser
-```
-
-7. **Run the Server**
-
-```bash
-python manage.py runserver
-```
-
-Then go to: [http://localhost:8000](http://localhost:8000)
-
----
-
-## 🖥️ Admin Panel
-
-- URL: `/admin`
-- Access: Login with the superuser created above
-- Manage users, services, bookings, and feedback from one place
-
----
-
-## 📂 Project Structure (Important Files)
+## Directory Structure
 
 ```
-gharsewa/
-├── gharsewa/             # Django Project Folder
-│   ├── settings.py       # Project Settings
-│   └── urls.py           # URL Routing
-├── services/             # App for service logic
-├── templates/            # HTML Templates
-├── static/               # CSS, JS, Images
-├── db.sqlite3            # Default database
-└── manage.py
+homeservices/
+├── allservices/         # Service categories, booking logic
+├── dashboard/           # User and provider dashboards
+├── service_providers/   # Provider management
+├── services/            # Service logic
+├── users/               # Custom user model and authentication
+├── templates/           # HTML templates
+├── static/              # Static files (CSS, JS, images)
+├── media/               # Uploaded media (profile photos, etc.)
+├── manage.py            # Django management script
+└── db.sqlite3           # Default database
 ```
 
----
+## Getting Started
 
-## 📌 Future Enhancements
+### Prerequisites
+- Python 3.8+
+- pip (Python package manager)
 
-- Email Notifications
-- Payment Integration
-- Chat between Users and Providers
-- Mobile App Version
+### Installation
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd GharSewaProject/homeservices
+   ```
+2. **Create a virtual environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+3. **Install dependencies:**
+   ```bash
+   pip install -r ../requirements.txt
+   ```
+4. **Apply migrations:**
+   ```bash
+   python manage.py migrate
+   ```
+5. **Create a superuser (admin):**
+   ```bash
+   python manage.py createsuperuser
+   ```
+6. **Run the development server:**
+   ```bash
+   python manage.py runserver
+   ```
+7. **Access the app:**
+   - Visit [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
 
----
+## Usage
+- **Users:** Register, browse services, book appointments, and manage requests.
+- **Service Providers:** Register, set up your profile, manage availability, and respond to service requests.
+- **Admin:** Manage users, providers, services, and bookings via the admin panel (`/admin`).
 
-## 🙏 Acknowledgements
+## Contributing
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-Thanks to:
-- Django & Python Community
-- Bootstrap for front-end styling
-- Google OAuth for seamless login
+## License
+[MIT](LICENSE) (or specify your license here)
 
----
+## Acknowledgements
+- Django, Django REST Framework, Bootstrap, and all open-source contributors.
 
-## 📬 Contact
+Screenshots of the system:
 
-**Developer:** Research Devkota  
-📧 Email: researchofficial55@gmail.com  
-📍 Location: Kathmandu, Nepal
+### 1. Home Page (User Dashboard)
+![Home Page](screenshots/homepage.png)
+
+### 2. Plastering Service Booking Form
+![Plastering Service Form](screenshots/service_form.png)
+
+### 3. My Service Requests (User View)
+![My Service Requests](screenshots/my_service_request.png)
+
+### 4. User Registration / Signup Page
+![User Signup](screenshots/user_signup.png)
+
+### 5. Service Provider Dashboard
+![Service Provider Dashboard](screenshots/service_provider_dashboard.png)
