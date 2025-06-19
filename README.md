@@ -3,7 +3,7 @@
 GharSewaProject is a Django-based web platform for booking and managing home services such as painting, plumbing, electrical work, cleaning, appliance repair, and more. It connects users with verified service providers, streamlining the process of finding, booking, and reviewing home services.
 
 
-                                                                                                      NOTE: 
+NOTE: 
 This is a partial version of the GharSewa project. The complete and fully functional project is hosted in a separate private repository. For access or collaboration inquiries, please contact me directly. Unauthorized copying, reproduction, or distribution of this project is strictly prohibited and may lead to legal consequences.
 
 The screenshots of the system is as below:
