@@ -3,7 +3,8 @@
 GharSewaProject is a Django-based web platform for booking and managing home services such as painting, plumbing, electrical work, cleaning, appliance repair, and more. It connects users with verified service providers, streamlining the process of finding, booking, and reviewing home services.
 
 
-NOTE: This is a partial version of the GharSewa project. The complete and fully functional project is hosted in a separate private repository. For access or collaboration inquiries, please contact me directly. Unauthorized copying, reproduction, or distribution of this project is strictly prohibited and may lead to legal consequences.
+                                                                                                      NOTE: 
+This is a partial version of the GharSewa project. The complete and fully functional project is hosted in a separate private repository. For access or collaboration inquiries, please contact me directly. Unauthorized copying, reproduction, or distribution of this project is strictly prohibited and may lead to legal consequences.
 
 The screenshots of the system is as below:
 
@@ -80,13 +81,10 @@ homeservices/
 ## Usage
 - **Users:** Register, browse services, book appointments, and manage requests.
 - **Service Providers:** Register, set up your profile, manage availability, and respond to service requests.
-- **Admin:** Manage users, providers, services, and bookings via the admin panel (`/admin`).
+- **Admin:** Manage users, providers, services, and bookings via the admin dashboard (`/admin/dashboard`).
 
 ## Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-[MIT](LICENSE) (or specify your license here)
 
 ## Acknowledgements
 - Django, Django REST Framework, Bootstrap, and all open-source contributors.
